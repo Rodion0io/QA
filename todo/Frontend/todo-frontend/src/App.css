@@ -1,0 +1,28 @@
+.container{
+  max-width: 80%;
+  margin: auto;
+}
+
+.action-button{
+  width: 15px;
+  height: 15px;
+}
+
+.action-button:hover{
+  cursor: pointer;
+}
+
+.modal-infa-block_container{
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.creater-block_title{
+  font-size: 25px;
+  font-weight: 400;
+}
+
+.error-message{
+  color: red;
+}

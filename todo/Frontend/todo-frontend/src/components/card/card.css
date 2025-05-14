@@ -1,0 +1,46 @@
+.task-card{
+    border: 1px solid #F0F2F5;
+    border-radius: 8px;
+    background-color: #f4f2f2;
+    width: 100%;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+
+}
+
+.title:hover{
+    cursor: pointer;
+    color: grey;
+}
+
+.infromation{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+}
+
+.meta-infa{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+}
+
+.warrning{
+    background-color: #ed9d42;
+}
+
+.missed{
+    background-color: #ed4242;
+}
+
+.late{
+    background-color: #4287f5;
+}
+
+.completed{
+    background-color: #89ed42;
+}

@@ -1,0 +1,28 @@
+.task-container{
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    max-width: 70%;
+    margin: auto;
+    margin-top: 10%;
+}
+
+.head-block{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 15px;
+    padding-right: 15px;
+    /* margin-bottom: 40px; */
+}
+
+.block-title{
+    font-size: 20px;
+    font-weight: 400;
+}
+
+.task-block{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
