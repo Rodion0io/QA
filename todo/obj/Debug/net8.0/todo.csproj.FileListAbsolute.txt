@@ -498,3 +498,8 @@
 /Users/rodionrybko/RiderProjects/todo/todo/bin/Debug/net8.0/Frontend/todo-frontend/tsconfig.app.json
 /Users/rodionrybko/RiderProjects/todo/todo/bin/Debug/net8.0/Frontend/todo-frontend/tsconfig.json
 /Users/rodionrybko/RiderProjects/todo/todo/bin/Debug/net8.0/Frontend/todo-frontend/tsconfig.node.json
+/Users/rodionrybko/RiderProjects/todo/todo/bin/Debug/net8.0/Frontend/cypress/fixtures/example.json
+/Users/rodionrybko/RiderProjects/todo/todo/bin/Debug/net8.0/Frontend/package-lock.json
+/Users/rodionrybko/RiderProjects/todo/todo/bin/Debug/net8.0/Frontend/package.json
+/Users/rodionrybko/RiderProjects/todo/todo/bin/Debug/net8.0/package-lock.json
+/Users/rodionrybko/RiderProjects/todo/todo/bin/Debug/net8.0/package.json

@@ -26,14 +26,17 @@ const CreaterTaskModal = ({ modalActive, setModalActive }: CreaterTaskProps) => 
                         <div className="input-block">
                             <p className="subtitle">Название*</p>
                             <Input
+                                id="title"
                                 inputType="input"
                                 className="creater-input"
                                 handleChanger={(value) => handleChange('title', value)}
                             />
+
                         </div>
                         <div className="input-block">
                             <p className="subtitle">Описание</p>
                             <Input
+                                id="description"
                                 inputType="input"
                                 className="creater-input"
                                 handleChanger={(value) => handleChange('description', value)}
@@ -42,6 +45,7 @@ const CreaterTaskModal = ({ modalActive, setModalActive }: CreaterTaskProps) => 
                         <div className="input-block">
                             <p className="subtitle">Дедлайн</p>
                             <Input
+                                id="deadline"
                                 inputType="datetime-local"
                                 className="creater-input"
                                 handleChanger={(value) => handleChange('deadline', value)}
@@ -50,15 +54,15 @@ const CreaterTaskModal = ({ modalActive, setModalActive }: CreaterTaskProps) => 
                         <div className="input-block">
                             <p className="subtitle">Приоритет</p>
                             <Select
-                                className="creater"
                                 id="priority"
+                                className="creater"
                                 valuesArrPriority={["", "LOW" , "MEDIUM" , "HIGH" , "CRITICAL"]}
                                 name="priori"
                                 selectChange={(value) => handleChange('priority', value)}
                             />
                         </div>
                         <div className="modal-actions-block">
-                            <Button text="Создать" className="submit" onClick={handleClick}/>
+                            <Button text="Создать" id="newPostSubmit" className="submit" onClick={handleClick}/>
                         </div>
                         {errorFlag ?
                             <p className="error-message">{errorMessage}</p>:

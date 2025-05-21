@@ -40,17 +40,6 @@ public class AppController : Controller
 
         return Ok("Заглушка");
     }
-
-    // [HttpGet("tasks")]
-    // public async Task<IActionResult> GetTasks([FromQuery] Priority? priority,
-    //     [FromQuery] Sort? sort)
-    // {
-    //     
-    //     
-    //     var listTasks = await _appService.TaskList(priority, sort);
-    //     
-    //     return Ok(listTasks);
-    // }
     
     [HttpGet("tasks")]
     public async Task<IActionResult> GetTasks([FromQuery] string? priority, [FromQuery] string? sort)
@@ -155,6 +144,22 @@ public class AppController : Controller
         else
         {
             return BadRequest(result);
+        }
+    }
+
+    // Реализовал для удобства в ui-тестах
+    [HttpDelete("clear")]
+    public async Task<IActionResult> Clear()
+    {
+        var res = await _appService.ClearList();
+
+        if (res.statusCode == 200)
+        {
+            return Ok(res);
+        }
+        else
+        {
+            return BadRequest();
         }
     }
 }

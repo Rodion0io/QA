@@ -25,7 +25,7 @@ const TasksContainer = () => {
                 <Filter handleFilter={(value) => handle(value)}/>
                 <div className="head-block">
                     <h2 className="block-title">Задачи</h2>
-                    <img className="action-button"
+                    <img id="newPost" className="action-button"
                          src={addIcon} alt="" onClick={handleModalState}/>
                 </div>
                 {tasks.length === 0 ?

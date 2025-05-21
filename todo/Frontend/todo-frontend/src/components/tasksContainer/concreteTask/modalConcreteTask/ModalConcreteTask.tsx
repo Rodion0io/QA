@@ -46,7 +46,7 @@ const ModalConcreteTask = ({ modalActive, setModalActive, taskInformation }: Mod
                         }
                         <div className="meta-infa-block">
                             <p className="priority">Приоритет: {PRIORITY[taskInformation.priority]}</p>
-                            <p className="status">{STATUS[taskInformation.status]}</p>
+                            <p id="status" className="status">{STATUS[taskInformation.status]}</p>
                         </div>
                     </div>
                 </section>

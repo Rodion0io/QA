@@ -30,17 +30,17 @@ const Card = ({ props }: CardProps) => {
 
     return (
         <>
-            <article className={`${props.deadline ? checkStatusTask(props.deadline, props.status) : null} task-card`}>
+            <article data-test="task" className={`${props.deadline ? checkStatusTask(props.deadline, props.status) : null} task-card`}>
                 <img
                     src={checkStatus(props.status)
                         ? checkbox
                         : selectedCheckbox}
-                    alt={checkStatus(props.status) ? "ACTIVE" : "COMPLETED"} className="action-button"
+                    alt={checkStatus(props.status) ? "ACTIVE" : "COMPLETED"} className="changer-status action-button"
                     id={props.id}
                     onClick={handleChangeStatus}
                 />
                 <div className="infromation">
-                    <h2 className="title" onClick={handleModalConcreteState}>{props.title}</h2>
+                    <h2 className="title" id={`title-${props.id}`} onClick={handleModalConcreteState}>{props.title}</h2>
                     <ModalConcreteTask
                         modalActive={modalConcreteActive}
                         setModalActive={handleModalConcreteState}
@@ -58,7 +58,7 @@ const Card = ({ props }: CardProps) => {
                     null
                 } */}
                 {/* {props.deadline ? */}
-                <img src={redactIcon} alt="" className="action-button" id={props.id} onClick={handleModalUpdateState}/>
+                <img src={redactIcon}  alt="" className="redact action-button" id={`redact-${props.id}`} onClick={handleModalUpdateState}/>
                 {/* null */}
                 {/* } */}
                 <RedactModal
@@ -66,7 +66,7 @@ const Card = ({ props }: CardProps) => {
                     setModalActive={handleModalUpdateState}
                     taskInformation={props}
                 />
-                <img src={deleteIcon} alt="" className="action-button" id={props.id} onClick={handleDelete}/>
+                <img src={deleteIcon}  alt="" className="action-button delete" id={`delete-${props.id}`} onClick={handleDelete}/>
             </article>
         </>
     )

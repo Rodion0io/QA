@@ -39,6 +39,7 @@ const RedactModal = ({ modalActive, setModalActive, taskInformation }: ModalConc
                     <div className="input-block">
                         <p className="subtitle">Название*</p>
                         <Input
+                            id="redact-title"
                             inputType="input"
                             className="creater-input"
                             initialValue={taskInformation.title}
@@ -48,6 +49,7 @@ const RedactModal = ({ modalActive, setModalActive, taskInformation }: ModalConc
                     <div className="input-block">
                         <p className="subtitle">Описание</p>
                         <Input
+                            id="redact-description"
                             inputType="input"
                             className="creater-input"
                             initialValue={taskInformation.description}
@@ -57,6 +59,7 @@ const RedactModal = ({ modalActive, setModalActive, taskInformation }: ModalConc
                     <div className="input-block">
                         <p className="subtitle">Дедлайн</p>
                         <Input
+                            id="redact-time"
                             inputType="datetime-local"
                             className="creater-input"
                             initialValue={formatDateForInput(taskInformation.deadline)}
@@ -75,9 +78,9 @@ const RedactModal = ({ modalActive, setModalActive, taskInformation }: ModalConc
                         />
                     </div>
                     <div className="modal-actions-block">
-                        <Button text="Обновить" className="submit" onClick={handleClick}/>
+                        <Button id="updatdeEdit" text="Обновить" className="submit" onClick={handleClick}/>
                     </div>
-                    {errorFlag && <p className="error-message">{errorMessage}</p>}
+                    {errorFlag && <p id="error-redact" className="error-message">{errorMessage}</p>}
                 </div>
             </section>
         </Modal>

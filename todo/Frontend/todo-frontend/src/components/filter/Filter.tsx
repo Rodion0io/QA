@@ -27,8 +27,9 @@ const Filter = ({ handleFilter }: FilterProps) => {
                     <div className="input-block">
                         <p className="subtitle">Приоритет</p>
                         <Select
+                            id="priority-filter"
                             className="creater"
-                            id="priority"
+                            
                             valuesArrPriority={["", "LOW" , "MEDIUM" , "HIGH" , "CRITICAL"]}
                             name="priori"
                             selectChange={(value) => handleChange('priority', value)}
@@ -37,8 +38,8 @@ const Filter = ({ handleFilter }: FilterProps) => {
                     <div className="input-block">
                         <p className="subtitle">Сортировать по</p>
                         <Select
+                            id="sort"
                             className="creater"
-                            id="priority"
                             valuesArrSort={["", "CreateAsc" , "CreateDesc" , "PriorityAsc" , "PriorityDesc", "StatusAsc", "StatusDesc"]}
                             name="sortBy"
                             selectChange={(value) => handleChange('sort', value)}
@@ -46,7 +47,7 @@ const Filter = ({ handleFilter }: FilterProps) => {
                     </div>
                 </div>
                 <div className="action-block">
-                    <Button text="Применить" className="submit filter-btn" onClick={handleClick}/>
+                    <Button id="submit-sort" text="Применить" className="submit filter-btn" onClick={handleClick}/>
                 </div>
             </section>
         </>

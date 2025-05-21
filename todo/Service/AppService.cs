@@ -34,7 +34,6 @@ public class AppService : IAppService
         { 
             title = model.title,
             description = model.description,
-            // Преобразуем значение времени в UTC, если оно имеет тип Unspecified
             deadline = model.deadline.HasValue 
                 ? DateTime.SpecifyKind(model.deadline.Value, DateTimeKind.Utc)
                 : null,
@@ -78,10 +77,10 @@ public class AppService : IAppService
         {
             return new ResponseModel(400, "Описание либо меньше 15 символов, либо больше 500");
         }
-        if (newTask.deadline != null && newTask.deadline?.ToUniversalTime() <= DateTime.UtcNow)
-        {
-            return new ResponseModel(400, "Указанное время не может бюыть меньше или равно текущему!");
-        }
+        // if (newTask.deadline != null && newTask.deadline?.ToUniversalTime() <= DateTime.UtcNow)
+        // {
+        //     return new ResponseModel(400, "Указанное время не может бюыть меньше или равно текущему!");
+        // }
 
         if (newTask.title.Length < 4 || newTask.title.Length > 255)
         {
@@ -96,131 +95,7 @@ public class AppService : IAppService
         return new ResponseModel(201, "Success"); 
     }
     
-    // public async Task<ResponseModel> NewTask(CreateTaskRequestDto model)
-    // {
-    //     if (_macrosService.CheckMacrosDate(model.title, Patterns.dateMacros) == false &&
-    //         model.deadline == null)
-    //     {
-    //         return new ResponseModel(400, "Введите дату!");
-    //     }
-    //
-    //     var newTask = new ToDoModel
-    //     {
-    //         title = model.title,
-    //         description = model.description,
-    //         deadline = model.deadline.HasValue
-    //             ? DateTime.SpecifyKind(model.deadline.Value, DateTimeKind.Utc)
-    //             : DateTime.UtcNow.Date,
-    //         priority = model.priority ?? Priority.MEDIUM,
-    //     };
-    //
-    //     if (model.priority == null &&
-    //         _macrosService.CheckMacrosPriority(model.title, Patterns.priorityMacros))
-    //     {
-    //         newTask.priority = _macrosService.GetPriority(model.title, Patterns.priorityMacros);
-    //     }
-    //
-    //     if (model.deadline == null &&
-    //         _macrosService.CheckMacrosDate(model.title, Patterns.dateMacros))
-    //     {
-    //         var deadline = _macrosService.GetDate(model.title, Patterns.dateMacros);
-    //         if (DateTime.SpecifyKind(deadline, DateTimeKind.Utc) <= DateTime.UtcNow)
-    //         {
-    //             return new ResponseModel(400, "Указанное время не может быть меньше или равно текущему!");
-    //         }
-    //         newTask.deadline = DateTime.SpecifyKind(deadline, DateTimeKind.Utc);
-    //     }
-    //
-    //     if (newTask.description != null &&
-    //         (newTask.description.Length < 15 || newTask.description.Length > 500))
-    //     {
-    //         return new ResponseModel(400, "Описание либо меньше 15 символов, либо больше 500");
-    //     }
-    //
-    //     if (newTask.deadline <= DateTime.UtcNow)
-    //     {
-    //         return new ResponseModel(400, "Указанное время не может быть меньше или равно текущему!");
-    //     }
-    //
-    //     newTask.title = _macrosService.deleteMacros(model.title, Patterns.priorityMacros);
-    //     newTask.title = _macrosService.deleteMacros(newTask.title, Patterns.dateMacros);
-    //     
-    //     Console.WriteLine(newTask.deadline);
-    //
-    //     await _context.Tasks.AddAsync(newTask);
-    //     await _context.SaveChangesAsync();
-    //
-    //     return new ResponseModel(200, "Success");
-    // }
-
-
-    // public async Task<List<TaskPreviewModel>> TaskList(Priority? priority, Sort? sort)
-    // {
-    //
-    //     List<ToDoModel> listModels = new List<ToDoModel>();
-    //     List<TaskPreviewModel> listDtoModels = new List<TaskPreviewModel>();
-    //     
-    //     if (priority != null)
-    //     {
-    //         if (Enum.TryParse<Priority>(priority, ignoreCase: true, out var parsed) 
-    //             && Enum.IsDefined(typeof(Priority), parsed))y
-    //         listModels = await _context.Tasks.Where(t => t.priority == priority).ToListAsync();
-    //     }
-    //     else
-    //     {
-    //         listModels = await _context.Tasks.ToListAsync();
-    //     }
-    //     
-    //
-    //     if (sort != null)
-    //     {
-    //         switch (sort)
-    //         {
-    //             case Sort.CreateAsc:
-    //                 listModels = listModels.OrderBy(t => t.created_at).ToList();
-    //                 break;
-    //             case Sort.CreateDesc:
-    //                 listModels = listModels.OrderByDescending(t => t.created_at).ToList();
-    //                 break;
-    //             case Sort.PriorityAsc:
-    //                 listModels = listModels.OrderBy(t => t.priority).ToList();
-    //                 break;
-    //             case Sort.PriorityDesc:
-    //                 listModels = listModels.OrderByDescending(t => t.priority).ToList();
-    //                 break;
-    //             case Sort.StatusAsc:
-    //                 listModels = listModels.OrderBy(t => t.status).ToList();
-    //                 break;
-    //             case Sort.StatusDesc:
-    //                 listModels = listModels.OrderByDescending(t => t.status).ToList();
-    //                 break;
-    //             default:
-    //                 break;
-    //         }   
-    //     }
-    //
-    //     foreach (var model in listModels)
-    //     {
-    //         await CheckStatus(model);
-    //         var dtoModel = new TaskPreviewModel
-    //         {
-    //             id = model.id,
-    //             title = model.title,
-    //             description = model.description,
-    //             deadline = model.deadline.HasValue 
-    //                 ? DateTime.SpecifyKind(model.deadline.Value, DateTimeKind.Unspecified).AddHours(7) 
-    //                 : null,
-    //             // deadline = model.deadline,
-    //             status = model.status,
-    //             priority = model.priority,
-    //             created_at = model.created_at,
-    //             updatedTime = model.updatedTime
-    //         };
-    //         listDtoModels.Add(dtoModel);
-    //     }
-    //
-    //     return listDtoModels;
-    // }
+    
     public async Task<List<TaskPreviewModel>> TaskList(Priority? priority, Sort? sort)
 {
     List<ToDoModel> listModels = new List<ToDoModel>();
@@ -303,10 +178,10 @@ public class AppService : IAppService
         {
             return new ResponseModel(400, "Описание либо меньше 15 символов, либо больше 500");
         }
-        if (model.deadline?.ToUniversalTime() <= DateTime.UtcNow)
-        {
-            return new ResponseModel(400, "Указанное время не может бюыть меньше или равно текущему!");
-        }
+        // if (model.deadline?.ToUniversalTime() <= DateTime.UtcNow)
+        // {
+        //     return new ResponseModel(400, "Указанное время не может бюыть меньше или равно текущему!");
+        // }
         
         if (model.title.Length < 4 || model.title.Length > 255)
         {
@@ -362,37 +237,6 @@ public class AppService : IAppService
             return new ResponseModel(200, "Success");
         }
     }
-
-    // public async Task<ResponseModel> UpdateStatus(Guid taskId, UpdateStatusDto model)
-    // {
-    //     var task = await _context.Tasks.FindAsync(taskId);
-    //
-    //     if (task == null)
-    //     {
-    //         return new ResponseModel(404, "Карточка не найдена");
-    //     }
-    //     else
-    //     {
-    //         if (!Enum.IsDefined(typeof(Status), model.Status))
-    //         {
-    //             return new ResponseModel(400, "Такого статуса нет!");
-    //         }
-    //         if (task.deadline?.ToUniversalTime() <= DateTime.UtcNow && model.Status == Status.COMPLETED)
-    //         {
-    //             model.Status = Status.LATE;
-    //         }
-    //
-    //         if (task.deadline?.ToUniversalTime() <= DateTime.UtcNow && model.Status == Status.ACTIVE)
-    //         {
-    //             model.Status = Status.OVERDUE;
-    //         }
-    //     
-    //         task.status = model.Status;
-    //         await _context.SaveChangesAsync();
-    //     
-    //         return new ResponseModel(200, "Success");
-    //     }
-    // }
     
     public async Task<ResponseModel> UpdateStatus(Guid taskId, UpdateStatusDto model)
     {
@@ -407,13 +251,7 @@ public class AppService : IAppService
         {
             return new ResponseModel(400, "Такого статуса нет!");
         }
-
-        if (model.Status == Status.OVERDUE || model.Status == Status.LATE)
-        {
-            return new ResponseModel(400, "Вы не можете поставить этот статус!");
-        }
-
-        // Автоматическое изменение статуса в зависимости от дедлайна
+        
         if (task.deadline?.ToUniversalTime() <= DateTime.UtcNow)
         {
             if (model.Status == Status.COMPLETED)
@@ -424,11 +262,17 @@ public class AppService : IAppService
 
         task.status = model.Status;
         await _context.SaveChangesAsync();
-
-        // Вернуть обновлённые данные
+        
         return new ResponseModel(200, "Успешно обновлён статус задачи");
     }
 
+    public async Task<ResponseModel> ClearList()
+    {
+        var table = await _context.Tasks.ToListAsync();
+        _context.Tasks.RemoveRange(table);
+        await _context.SaveChangesAsync();
+        return new ResponseModel(200, "Список очищен");
+    }
 
     private async Task CheckStatus(ToDoModel model)
     {
@@ -438,7 +282,9 @@ public class AppService : IAppService
             model.status = Status.OVERDUE;
             await _context.SaveChangesAsync();
         }
-        else if (!(DateTime.UtcNow >= model.deadline) && model.status != Status.ACTIVE)
+        else if (!(DateTime.UtcNow >= model.deadline) 
+                 && model.status != Status.ACTIVE 
+                 && model.status != Status.COMPLETED)
         {
             model.status = Status.ACTIVE;
             await _context.SaveChangesAsync();

@@ -3,7 +3,8 @@ import { deleteTask } from "../../../utils/api/deleteTask";
 export const handleDelete = async (event: React.MouseEvent<HTMLImageElement>) => {
     const id = event.currentTarget.id;
     try{
-        await deleteTask(id);
+        
+        await deleteTask(id.slice(7));
         window.location.href = "/";
     }
     catch (error){

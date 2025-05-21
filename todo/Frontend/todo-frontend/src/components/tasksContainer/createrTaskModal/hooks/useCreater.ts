@@ -30,6 +30,10 @@ export const useCreater = (): [(input: string, value: string) => void,
             setErrorFlag(true);
             setErrorMessage("Длина названия минимум 4 символа");
         }
+        else if (newTask.title.length > 255){
+            setErrorFlag(true);
+            setErrorMessage("Максимальная длина названия максимум 255 символа");
+        }
         else if (newTask.description && (newTask.description.length < 15 || newTask.description.length > 500)){
             setErrorFlag(true);
             setErrorMessage("Описание либо меньше 15 символов, либо больше 500");
@@ -38,13 +42,13 @@ export const useCreater = (): [(input: string, value: string) => void,
             //     setErrorFlag(true);
             //     setErrorMessage("Введите дату");
         // }
-        else if (
-            (newTask.deadline && new Date(newTask.deadline) <= new Date()) ||
-            (newTask.title.match(DATE_MACROS) && new Date(newTask.title.match(DATE_MACROS)![0]) <= new Date())
-        ){
-            setErrorFlag(true);
-            setErrorMessage("Вы не можете планировать на прошедшее время!");
-        }
+        // else if (
+        //     (newTask.deadline && new Date(newTask.deadline) <= new Date()) ||
+        //     (newTask.title.match(DATE_MACROS) && new Date(newTask.title.match(DATE_MACROS)![0]) <= new Date())
+        // ){
+        //     setErrorFlag(true);
+        //     setErrorMessage("Вы не можете планировать на прошедшее время!");
+        // }
         else{
             setErrorFlag(false);
             setErrorMessage("");

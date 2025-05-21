@@ -845,40 +845,9 @@ public class ApiTest : IClassFixture<CustomWebApplicationFactory<Program>>, IAsy
         afterEditTasks.Should().HaveCount(1);
 
         var task = afterEditTasks.Single();
-        task.status.Should().Be(tasks[0].status);
+        task.status.Should().Be(editModel.Status);
     }
     
-    /// <summary>
-    /// Изменение статуса(Поставил Overdue)
-    /// </summary>
-    [Fact]
-    public async Task UpdateStatusTask_WithValidDataWithOverdue_ReturnsBadRequest()
-    {
-        var model = new CreateTaskRequestDto("1233wahjerbfskuwejhb", "1234567890123456789", DateTime.SpecifyKind(DateTimeOffset.Parse("2025-12-31T09:07:58.474Z").UtcDateTime, DateTimeKind.Utc), Priority.LOW);
-        var content = JsonSerialize(model);
-        var response = await _client.PostAsync("/api/App/create", content);
-        response.StatusCode.Should().Be(HttpStatusCode.OK);
-
-        var tasks = await GetListTasks();
-        tasks.Should().HaveCount(1);
-        
-        var id = tasks[0].id;
-
-        var editModel = new UpdateStatusDto
-        {
-            Status = Status.OVERDUE
-        };
-    
-        var editContent = JsonSerialize(editModel);
-        var editResponse = await _client.PutAsync($"/api/App/updateStatus/{id}", editContent);
-        editResponse.StatusCode.Should().Be(HttpStatusCode.BadRequest);
-    
-        var afterEditTasks = await GetListTasks();
-        afterEditTasks.Should().HaveCount(1);
-
-        var task = afterEditTasks.Single();
-        task.status.Should().Be(Status.ACTIVE);
-    }
     
     /// <summary>
     /// Изменение статуса(Несуществующая карточка)

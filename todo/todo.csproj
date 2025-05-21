@@ -28,7 +28,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Frontend\" />
+      <_ContentIncludedByDefault Remove="Frontend\todo-frontend\cypress\fixtures\example.json" />
     </ItemGroup>
     
 </Project>

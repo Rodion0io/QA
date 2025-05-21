@@ -17,4 +17,6 @@ public interface IAppService
     public Task<ResponseModel> DeleteTask(Guid taskId);
     
     public Task<ResponseModel> UpdateStatus(Guid taskId, UpdateStatusDto model);
+
+    public Task<ResponseModel> ClearList();
 }
